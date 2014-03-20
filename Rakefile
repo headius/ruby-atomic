@@ -53,9 +53,12 @@ if defined?(JRUBY_VERSION)
   task :compile => :jar
 else
   require "rake/extensiontask"
-  Rake::ExtensionTask.new "atomic" do |ext|
+  spec = Gem::Specification.load 'atomic.gemspec'
+  Rake::ExtensionTask.new "atomic", spec do |ext|
     ext.ext_dir = 'ext'
     ext.name ='atomic_reference'
+    ext.cross_compile = true
+    ext.cross_platform = ['x86-mingw32', 'x64-mingw32']
   end
 end
 

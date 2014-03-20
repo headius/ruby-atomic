@@ -10,6 +10,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'atomic_reference'
+begin
+  RUBY_VERSION =~ /(\d+.\d+)/
+  require "#{$1}/atomic_reference"
+rescue LoadError
+  require 'atomic_reference'
+end
 require 'atomic/direct_update'
 require 'atomic/numeric_cas_wrapper'

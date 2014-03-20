@@ -51,3 +51,13 @@ Building
 ========
 
 As of 1.1.0, JDK8 is required to build the atomic gem, since it attempts to use the new atomic Unsafe.getAndSetObject method only in JDK8. The resulting code should still work fine as far back as Java 5.
+
+Windows fat binary gems for use with the RubyInstaller can be built per cross compiler, provided that proper cross-rubies are installed. The recommented way is to use the [rake-compiler-dev-box](https://github.com/tjschuck/rake-compiler-dev-box):
+
+```sh
+cd /vagrant
+bin/prepare_xrubies
+git clone https://github.com/headius/ruby-atomic.git
+cd ruby-atomic
+rake cross native gem RUBY_CC_VERSION=1.9.3:2.0.0
+```
